@@ -7,21 +7,21 @@ public class SceneLoader : MonoBehaviour
 {
     public void LoadLevelScene(int index)
     {
-        if (index >= 0 && index <= SceneManager.sceneCount) 
+        if (index >= 0 && index <= SceneManager.sceneCountInBuildSettings) 
             SceneManager.LoadScene(index);
     }
 
-    public void LoadNextLevel()
+    public void LoadNextScene()
     {
         int sceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        if (SceneManager.sceneCount >= sceneIndex)
+        if (SceneManager.sceneCountInBuildSettings >= sceneIndex)
             SceneManager.LoadScene(sceneIndex);
     }
 
-    public void LoadPreviousLevel()
+    public void LoadPreviousScene()
     {
         int sceneIndex = SceneManager.GetActiveScene().buildIndex - 1;
-        if (sceneIndex >= 1)
-            SceneManager.LoadScene(sceneIndex, LoadSceneMode.Additive);
+        if (sceneIndex > 0)
+            SceneManager.LoadScene(sceneIndex);
     }
 }

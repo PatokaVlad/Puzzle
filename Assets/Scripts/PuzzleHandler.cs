@@ -9,6 +9,9 @@ public class PuzzleHandler : MonoBehaviour
 
     private int piecesCount = 0;
 
+    public delegate void OnPlayerWin();
+    public event OnPlayerWin onPlayerWin;
+
     public void IncreasePiecesCount()
     {
         piecesCount++;
@@ -20,6 +23,7 @@ public class PuzzleHandler : MonoBehaviour
         if(piecesCount == 0)
         {
             _balloonsHandler.SpawnBalloons();
+            onPlayerWin();
         }
     }
 }
