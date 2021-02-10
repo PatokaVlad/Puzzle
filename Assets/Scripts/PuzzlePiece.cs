@@ -11,13 +11,14 @@ public class PuzzlePiece : MonoBehaviour
     private Collider2D _collider2D;
 
     private PuzzleHandler _puzzleHandler;
+    private SoundHandler _soundHandler;
 
     private Vector2 initialPosition = new Vector2();
 
     [SerializeField]
     private float correctPositionAccuracy = 0.5f;
     [SerializeField]
-    private float smoothMultiplier = 2.5f;
+    private float smoothMultiplier = 4f;
 
     private bool inRightPlace = false;
     private bool isTouched = false;
@@ -27,6 +28,7 @@ public class PuzzlePiece : MonoBehaviour
     private void Start()
     {
         _puzzleHandler = FindObjectOfType<PuzzleHandler>();
+        _soundHandler = FindObjectOfType<SoundHandler>();
 
         _transform = GetComponent<Transform>();
         _collider2D = GetComponent<Collider2D>();
@@ -37,12 +39,12 @@ public class PuzzlePiece : MonoBehaviour
 
     private void Update()
     {
-        //if (Input.touchCount > 0 && !inRightPlace)
-        //{
-        //    HandlePressing();
-        //}
-        if (!inRightPlace)
-            MouseMove();
+        if (Input.touchCount > 0 && !inRightPlace)
+        {
+            HandlePressing();
+        }
+        //if (!inRightPlace)
+        //    MouseMove();
     }
 
     private void HandlePressing()
@@ -71,8 +73,9 @@ public class PuzzlePiece : MonoBehaviour
                 }
                 break;
             case TouchPhase.Ended:
-                if (!inRightPlace)
+                if (!inRightPlace && isTouched)
                 {
+                    _soundHandler.PlayFailClip();
                     _transform.position = initialPosition;
                 }
                 isTouched = false;
@@ -98,6 +101,8 @@ public class PuzzlePiece : MonoBehaviour
             _transform.position = _rightPlaceTransform.position;
 
             _puzzleHandler.DecreasePiecesCount();
+            _puzzleHandler.PlayObjectParticle(_transform.position);
+            _soundHandler.PlayWinClip();
 
             inRightPlace = true;
         }
@@ -141,8 +146,9 @@ public class PuzzlePiece : MonoBehaviour
                 }
                 break;
             case TouchPhase.Ended:
-                if (!inRightPlace)
+                if (!inRightPlace && isTouched)
                 {
+                    _soundHandler.PlayFailClip();
                     _transform.position = initialPosition;
                 }
                 isTouched = false;

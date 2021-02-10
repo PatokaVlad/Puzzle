@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 473fb078c2b1b8044aeacad908fa387d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particleHandler: {fileID: 8863349351409538182, guid: 6020671ed43f8a549852695e7c249980, type: 3}
   minSpeed: 2
   maxSpeed: 4
 --- !u!58 &-7684693026540983617

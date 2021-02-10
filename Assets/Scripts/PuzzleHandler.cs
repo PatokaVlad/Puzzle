@@ -6,6 +6,8 @@ public class PuzzleHandler : MonoBehaviour
 {
     [SerializeField]
     private BalloonsHandler _balloonsHandler;
+    [SerializeField]
+    private ParticleHandler _particleHandler;
 
     private int piecesCount = 0;
 
@@ -20,10 +22,16 @@ public class PuzzleHandler : MonoBehaviour
     public void DecreasePiecesCount()
     {
         piecesCount--;
+
         if(piecesCount == 0)
         {
             _balloonsHandler.SpawnBalloons();
             onPlayerWin();
         }
+    }
+
+    public void PlayObjectParticle(Vector2 position)
+    {
+        _particleHandler.PlayParticle(position);
     }
 }

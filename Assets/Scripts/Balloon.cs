@@ -6,6 +6,7 @@ public class Balloon : MonoBehaviour
 {
     private Collider2D _collider2D;
     private Transform _transform;
+    private BalloonsHandler _balloonsHandler;
 
     [SerializeField]
     private float minSpeed = 4;
@@ -18,6 +19,8 @@ public class Balloon : MonoBehaviour
 
     private void Start()
     {
+        _balloonsHandler = FindObjectOfType<BalloonsHandler>();
+
         _transform = GetComponent<Transform>();
         _collider2D = GetComponent<Collider2D>();
 
@@ -27,8 +30,8 @@ public class Balloon : MonoBehaviour
     private void Update()
     {
         MoveUp();
-        //CheckPressing();
-        CheckMousePressing();
+        CheckPressing();
+        //CheckMousePressing();
     }
 
     private void MoveUp()
@@ -59,6 +62,7 @@ public class Balloon : MonoBehaviour
 
             if (_collider2D == Physics2D.OverlapPoint(touchPosition))
             {
+                _balloonsHandler.PlayObjectParticle(_transform.position);
                 DestroyGameObject();
             }
         }

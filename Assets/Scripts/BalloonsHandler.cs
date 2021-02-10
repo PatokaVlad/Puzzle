@@ -9,6 +9,8 @@ public class BalloonsHandler : MonoBehaviour
 
     [SerializeField]
     private Camera _camera;
+    [SerializeField]
+    private ParticleHandler _particleHandler;
 
     [SerializeField]
     private float balloonsCount = 10;
@@ -29,5 +31,10 @@ public class BalloonsHandler : MonoBehaviour
             Vector2 spawnPosition = new Vector2(Random.Range(-edgeX, edgeX), -edgeY - 2);
             Instantiate(balloon, spawnPosition, Quaternion.identity);
         }
+    }
+
+    public void PlayObjectParticle(Vector2 position)
+    {
+        _particleHandler.PlayParticle(position);
     }
 }
