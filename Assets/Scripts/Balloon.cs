@@ -7,7 +7,6 @@ public class Balloon : MonoBehaviour
     private Collider2D _collider2D;
     private Transform _transform;
     private BalloonsHandler _balloonsHandler;
-    private SoundHandler _soundHandler;
 
     [SerializeField]
     private float minSpeed = 4;
@@ -21,7 +20,6 @@ public class Balloon : MonoBehaviour
     private void Start()
     {
         _balloonsHandler = FindObjectOfType<BalloonsHandler>();
-        _soundHandler = FindObjectOfType<SoundHandler>();
 
         _transform = GetComponent<Transform>();
         _collider2D = GetComponent<Collider2D>();
@@ -79,8 +77,8 @@ public class Balloon : MonoBehaviour
     {
         if (!isDestroyed)
         {
+            _balloonsHandler.DecreaseBalloonsCount();
             isDestroyed = true;
-            _soundHandler.PlayBalloonClip();
             Destroy(gameObject);
         }
     }

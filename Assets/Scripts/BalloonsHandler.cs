@@ -11,6 +11,7 @@ public class BalloonsHandler : MonoBehaviour
     private Camera _camera;
     [SerializeField]
     private ParticleHandler _particleHandler;
+    private SoundHandler _soundHandler;
 
     [SerializeField]
     private float balloonsCount = 10;
@@ -24,6 +25,8 @@ public class BalloonsHandler : MonoBehaviour
 
     private void Start()
     {
+        _soundHandler = FindObjectOfType<SoundHandler>();
+
         edgeX = _camera.orthographicSize * _camera.aspect;
         edgeY = _camera.orthographicSize;
     }
@@ -41,5 +44,16 @@ public class BalloonsHandler : MonoBehaviour
     public void PlayObjectParticle(Vector2 position)
     {
         _particleHandler.PlayParticle(position);
+    }
+
+    public void DecreaseBalloonsCount()
+    {
+        if (balloonsCount != 0)
+        {
+            balloonsCount--;
+            if(_soundHandler != null)
+                _soundHandler.PlayBalloonClip();
+        }
+
     }
 }

@@ -18,8 +18,15 @@ public class PuzzlePiece : MonoBehaviour
     [SerializeField]
     private float correctPositionAccuracy = 0.5f;
     [SerializeField]
-    private float smoothMultiplier = 4f;
+    private float animationAccuracy = 0.01f;
+    [SerializeField]
+    private float smoothDragMultiplier = 4f;
+    [SerializeField]
+    private float minSmoothAnimationMultiplier = 1.5f;
+    [SerializeField]
+    private float maxSmoothAnimationMultiplier = 3f;
 
+    private bool inInitialPlace = false;
     private bool inRightPlace = false;
     private bool isTouched = false;
 
@@ -35,21 +42,26 @@ public class PuzzlePiece : MonoBehaviour
 
         initialPosition = _transform.position;
         _puzzleHandler.IncreasePiecesCount();
+
+        StartCoroutine(VisitStartPosition());
     }
 
     private void Update()
     {
-        if (!_puzzleHandler.UseMouse)
+        if(inInitialPlace)
         {
-            if (Input.touchCount > 0 && !inRightPlace)
+            if (!_puzzleHandler.UseMouse)
             {
-                HandlePressing();
+                if (Input.touchCount > 0 && !inRightPlace)
+                {
+                    HandlePressing();
+                }
             }
-        }
-        else
-        {
-            if (!inRightPlace)
-                MouseMove();
+            else
+            {
+                if (!inRightPlace)
+                    MouseMove();
+            }
         }
     }
 
@@ -69,13 +81,13 @@ public class PuzzlePiece : MonoBehaviour
             case TouchPhase.Moved:
                 if (isTouched)
                 {
-                    MovePiece(touchPosition);
+                    MovePiece(touchPosition, smoothDragMultiplier);
                 }
                 break;
             case TouchPhase.Stationary:
                 if (isTouched)
                 {
-                    MovePiece(touchPosition);
+                    MovePiece(touchPosition, smoothDragMultiplier);
                 }
                 break;
             case TouchPhase.Ended:
@@ -90,27 +102,37 @@ public class PuzzlePiece : MonoBehaviour
                 break;
         }
 
-        StickToRightPlace();
+        StickToRightPlace(_rightPlaceTransform.position, PositionsTypes.Initial, correctPositionAccuracy);
     }
 
-    private void MovePiece(Vector2 targetPosition)
+    private void MovePiece(Vector2 targetPosition, float smoothMultiplier)
     {
         Vector2 motionPosition = Vector2.Lerp(_transform.position, targetPosition, smoothMultiplier * Time.deltaTime);
         _transform.position = motionPosition;
     }
 
-    private void StickToRightPlace()
+    private void StickToRightPlace(Vector2 targetPlace, PositionsTypes type, float accuracy)
     {
-        if (Mathf.Abs(_transform.position.x - _rightPlaceTransform.position.x) <= correctPositionAccuracy &&
-            Mathf.Abs(_transform.position.y - _rightPlaceTransform.position.y) <= correctPositionAccuracy)
+        if (Mathf.Abs(_transform.position.x - targetPlace.x) <= accuracy &&
+            Mathf.Abs(_transform.position.y - targetPlace.y) <= accuracy)
         {
-            _transform.position = _rightPlaceTransform.position;
+            _transform.position = targetPlace;
 
-            _puzzleHandler.DecreasePiecesCount();
-            _puzzleHandler.PlayObjectParticle(_transform.position);
-            _soundHandler.PlayWinClip();
-
-            inRightPlace = true;
+            switch (type)
+            {
+                case PositionsTypes.Start:
+                    inInitialPlace = true;
+                    break;
+                case PositionsTypes.Initial:
+                    _puzzleHandler.DecreasePiecesCount();
+                    _puzzleHandler.PlayObjectParticle(_transform.position);
+                    _soundHandler.PlayWinClip();
+                    inRightPlace = true;
+                    break;
+                default:
+                    break;
+            }
+                
         }
     }
 
@@ -148,7 +170,7 @@ public class PuzzlePiece : MonoBehaviour
             case TouchPhase.Moved:
                 if (isTouched)
                 {
-                    MovePiece(mousePosition);
+                    MovePiece(mousePosition, smoothDragMultiplier);
                 }
                 break;
             case TouchPhase.Ended:
@@ -163,6 +185,26 @@ public class PuzzlePiece : MonoBehaviour
                 break;
         }
 
-        StickToRightPlace();
+        StickToRightPlace(_rightPlaceTransform.position, PositionsTypes.Initial, correctPositionAccuracy);
     }
+
+    private IEnumerator VisitStartPosition()
+    {
+        float smooth = Random.Range(minSmoothAnimationMultiplier, maxSmoothAnimationMultiplier);
+        _transform.position = _rightPlaceTransform.position;
+        while(!inInitialPlace)
+        {
+            smooth += Time.deltaTime;
+            MovePiece(initialPosition, smooth);
+            StickToRightPlace(initialPosition, PositionsTypes.Start, animationAccuracy);
+
+            yield return null;
+        }
+    }
+}
+
+enum PositionsTypes
+{
+    Start,
+    Initial
 }
