@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: -2413806693520163455, guid: 8d85c1e395b2b5f4a940cdec03d9963a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -96,7 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 473fb078c2b1b8044aeacad908fa387d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _particleHandler: {fileID: 8863349351409538182, guid: 6020671ed43f8a549852695e7c249980, type: 3}
   minSpeed: 2
   maxSpeed: 4
 --- !u!58 &-7684693026540983617

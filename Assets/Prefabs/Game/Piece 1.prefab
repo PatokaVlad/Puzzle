@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 2396515113924460921}
   - component: {fileID: 2396515113924460923}
   - component: {fileID: 2396515113924460922}
-  - component: {fileID: 2396515113924460916}
+  - component: {fileID: 6972119152235810767}
+  - component: {fileID: -9222645526858597473}
   m_Layer: 0
   m_Name: Piece 1
   m_TagString: Untagged
@@ -97,11 +98,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rightPlaceTransform: {fileID: 0}
-  _particleHandler: {fileID: 8474539801931889833, guid: 567fdadde2c84724aa6d51dfc70b7ef8, type: 3}
   correctPositionAccuracy: 0.5
   smoothMultiplier: 4
---- !u!61 &2396515113924460916
-BoxCollider2D:
+--- !u!60 &6972119152235810767
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -123,6 +123,20 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.5, y: 0.5}
+      - {x: -0.5, y: -0.5}
+      - {x: 0.5, y: -0.5}
+      - {x: 0.5, y: 0.5}
+--- !u!210 &-9222645526858597473
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2396515113924460920}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 3

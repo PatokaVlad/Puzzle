@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   failClip: {fileID: 8300000, guid: 7e147f17dfe9db241a913ddf86650056, type: 3}
   winClip: {fileID: 8300000, guid: 437ba3dd0f609d546b08e72788ab70c9, type: 3}
+  balloonClip: {fileID: 8300000, guid: f81001dc9674bf24ba264736b46714b1, type: 3}
 --- !u!82 &-5489957690058925775
 AudioSource:
   m_ObjectHideFlags: 0

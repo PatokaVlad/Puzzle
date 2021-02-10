@@ -14,6 +14,11 @@ public class PuzzleHandler : MonoBehaviour
     public delegate void OnPlayerWin();
     public event OnPlayerWin onPlayerWin;
 
+    [SerializeField]
+    private bool useMouse;
+
+    public bool UseMouse { get => useMouse; }
+
     public void IncreasePiecesCount()
     {
         piecesCount++;

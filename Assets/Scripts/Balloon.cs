@@ -7,6 +7,7 @@ public class Balloon : MonoBehaviour
     private Collider2D _collider2D;
     private Transform _transform;
     private BalloonsHandler _balloonsHandler;
+    private SoundHandler _soundHandler;
 
     [SerializeField]
     private float minSpeed = 4;
@@ -20,6 +21,7 @@ public class Balloon : MonoBehaviour
     private void Start()
     {
         _balloonsHandler = FindObjectOfType<BalloonsHandler>();
+        _soundHandler = FindObjectOfType<SoundHandler>();
 
         _transform = GetComponent<Transform>();
         _collider2D = GetComponent<Collider2D>();
@@ -30,8 +32,11 @@ public class Balloon : MonoBehaviour
     private void Update()
     {
         MoveUp();
-        CheckPressing();
-        //CheckMousePressing();
+
+        if(!_balloonsHandler.UseMouse)
+            CheckPressing();
+        else
+            CheckMousePressing();
     }
 
     private void MoveUp()
@@ -47,10 +52,7 @@ public class Balloon : MonoBehaviour
             Touch touch = Input.GetTouch(0);
             Vector2 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
 
-            if (_collider2D == Physics2D.OverlapPoint(touchPosition))
-            {
-                DestroyGameObject();
-            }
+            CheckInputPosition(touchPosition);
         }
     }
 
@@ -60,11 +62,16 @@ public class Balloon : MonoBehaviour
         {
             Vector2 touchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            if (_collider2D == Physics2D.OverlapPoint(touchPosition))
-            {
-                _balloonsHandler.PlayObjectParticle(_transform.position);
-                DestroyGameObject();
-            }
+            CheckInputPosition(touchPosition);
+        }
+    }
+
+    private void CheckInputPosition(Vector2 position)
+    {
+        if (_collider2D == Physics2D.OverlapPoint(position))
+        {
+            _balloonsHandler.PlayObjectParticle(_transform.position);
+            DestroyGameObject();
         }
     }
 
@@ -73,6 +80,7 @@ public class Balloon : MonoBehaviour
         if (!isDestroyed)
         {
             isDestroyed = true;
+            _soundHandler.PlayBalloonClip();
             Destroy(gameObject);
         }
     }

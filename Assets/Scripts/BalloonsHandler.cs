@@ -17,6 +17,11 @@ public class BalloonsHandler : MonoBehaviour
     private float edgeX,
         edgeY;
 
+    [SerializeField]
+    private bool useMouse;
+
+    public bool UseMouse { get => useMouse; }
+
     private void Start()
     {
         edgeX = _camera.orthographicSize * _camera.aspect;

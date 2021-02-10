@@ -39,12 +39,18 @@ public class PuzzlePiece : MonoBehaviour
 
     private void Update()
     {
-        if (Input.touchCount > 0 && !inRightPlace)
+        if (!_puzzleHandler.UseMouse)
         {
-            HandlePressing();
+            if (Input.touchCount > 0 && !inRightPlace)
+            {
+                HandlePressing();
+            }
         }
-        //if (!inRightPlace)
-        //    MouseMove();
+        else
+        {
+            if (!inRightPlace)
+                MouseMove();
+        }
     }
 
     private void HandlePressing()

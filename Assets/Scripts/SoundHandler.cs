@@ -10,6 +10,8 @@ public class SoundHandler : MonoBehaviour
     private AudioClip failClip;
     [SerializeField]
     private AudioClip winClip;
+    [SerializeField]
+    private AudioClip balloonClip;
 
     private void Start()
     {
@@ -20,11 +22,6 @@ public class SoundHandler : MonoBehaviour
 
     public void PlayFailClip() => _audioSource.PlayOneShot(failClip);
 
-    public void PlayPuzzleClip(bool isWin)
-    {
-        if (isWin) 
-            _audioSource.PlayOneShot(winClip);
-        else
-            _audioSource.PlayOneShot(failClip);
-    }
+    public void PlayBalloonClip() => _audioSource.PlayOneShot(balloonClip);
+
 }
