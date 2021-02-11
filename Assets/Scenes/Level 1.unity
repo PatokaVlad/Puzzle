@@ -3969,5 +3969,9 @@ PrefabInstance:
       propertyPath: balloonClip
       value: 
       objectReference: {fileID: 8300000, guid: f81001dc9674bf24ba264736b46714b1, type: 3}
+    - target: {fileID: 7561020761285790182, guid: 1dbadd80addfd0b478396065cb9ea06c, type: 3}
+      propertyPath: completePuzzleClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f4fe9e10ec249e0488246c1b32c4c611, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1dbadd80addfd0b478396065cb9ea06c, type: 3}

@@ -7,6 +7,8 @@ public class CompletePuzzleHandler : MonoBehaviour
     private Collider2D _collider2D;
     private ShadowAnimationHandler _animationHandler;
     private Transform _transform;
+    private SoundHandler _soundHandler;
+    private PuzzleHandler _puzzleHandler;
 
     private Vector2 startPosition = new Vector2();
 
@@ -20,8 +22,19 @@ public class CompletePuzzleHandler : MonoBehaviour
     [SerializeField]
     private bool useMouse = false;
 
+    private void OnEnable()
+    {
+        _puzzleHandler.onPlayerWin += PlayAnimation;
+    }
+
+    private void Awake()
+    {
+        _puzzleHandler = FindObjectOfType<PuzzleHandler>();
+    }
+
     private void Start()
     {
+        _soundHandler = FindObjectOfType<SoundHandler>();
         _collider2D = GetComponent<Collider2D>();
         _animationHandler = GetComponent<ShadowAnimationHandler>();
         _transform = GetComponent<Transform>();
@@ -38,6 +51,11 @@ public class CompletePuzzleHandler : MonoBehaviour
             else
                 TouchHandle();
         }
+    }
+
+    private void OnDisable()
+    {
+        _puzzleHandler.onPlayerWin -= PlayAnimation;
     }
 
     private void CheckInput(Vector2 position)
@@ -71,6 +89,8 @@ public class CompletePuzzleHandler : MonoBehaviour
 
     private IEnumerator StartAnimation()
     {
+        _soundHandler.PlayCompleteClip();
+
         isPlaying = true;
         _animationHandler.StartAnimation(shadowAnimationDuration, 1, false, Vector2.zero);
 
@@ -79,5 +99,10 @@ public class CompletePuzzleHandler : MonoBehaviour
         _transform.position = startPosition + new Vector2(-0.1f, 0.1f);
         _animationHandler.StartAnimation(shadowAnimationDuration, -1, true, new Vector2(0.1f, -0.1f));
         isPlaying = false;
+    }
+
+    private void PlayAnimation()
+    {
+        StartCoroutine(StartAnimation());
     }
 }

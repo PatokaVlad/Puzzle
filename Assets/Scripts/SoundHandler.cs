@@ -12,6 +12,8 @@ public class SoundHandler : MonoBehaviour
     private AudioClip winClip;
     [SerializeField]
     private AudioClip balloonClip;
+    [SerializeField]
+    private AudioClip completePuzzleClip;
 
     private void Start()
     {
@@ -23,5 +25,7 @@ public class SoundHandler : MonoBehaviour
     public void PlayFailClip() => _audioSource.PlayOneShot(failClip);
 
     public void PlayBalloonClip() => _audioSource.PlayOneShot(balloonClip);
+
+    public void PlayCompleteClip() => _audioSource.PlayOneShot(completePuzzleClip);
 
 }
