@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &425817425713849865
+--- !u!1 &8389552318238666780
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 425817425713849867}
-  - component: {fileID: 425817425713849866}
+  - component: {fileID: 8389552318238666782}
+  - component: {fileID: 8389552318238666783}
   m_Layer: 0
   m_Name: PuzzleHandler
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &425817425713849867
+--- !u!4 &8389552318238666782
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 425817425713849865}
+  m_GameObject: {fileID: 8389552318238666780}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.9155803, y: -0.82666165, z: -0.8828492}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,25 +31,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &425817425713849866
+--- !u!114 &8389552318238666783
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 425817425713849865}
+  m_GameObject: {fileID: 8389552318238666780}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 122a03562d809cb439a9614f27511768, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _balloonsHandler: {fileID: 0}
-  _particleHandler: {fileID: 0}
+  _particleHandler: {fileID: 8373693278543706391, guid: 99b6cc9f4c15c1e44b32ba09f542296e, type: 3}
   completePuzzle: {fileID: 0}
+  puzzleBackground: {fileID: 0}
   correctPositionAccuracy: 0.2
   animationAccuracy: 0.01
   smoothDragMultiplier: 10
   minSmoothAnimationMultiplier: 2.5
   maxSmoothAnimationMultiplier: 4
-  shadowAnimationDuration: 0.5
+  shadowAnimationDuration: 0.1
   useMouse: 0
