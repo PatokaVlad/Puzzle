@@ -30,11 +30,11 @@ public class CompletePuzzleHandler : MonoBehaviour
     private void Awake()
     {
         _puzzleHandler = FindObjectOfType<PuzzleHandler>();
+        _soundHandler = FindObjectOfType<SoundHandler>();
     }
 
     private void Start()
     {
-        _soundHandler = FindObjectOfType<SoundHandler>();
         _collider2D = GetComponent<Collider2D>();
         _animationHandler = GetComponent<ShadowAnimationHandler>();
         _transform = GetComponent<Transform>();
@@ -89,6 +89,7 @@ public class CompletePuzzleHandler : MonoBehaviour
 
     private IEnumerator StartAnimation()
     {
+        yield return new WaitForFixedUpdate();
         _soundHandler.PlayCompleteClip();
 
         isPlaying = true;

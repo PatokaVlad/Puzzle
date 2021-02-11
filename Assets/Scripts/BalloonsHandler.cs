@@ -10,9 +10,14 @@ public class BalloonsHandler : MonoBehaviour
     [SerializeField]
     private ParticleHandler _particleHandler;
     private SoundHandler _soundHandler;
+    private PuzzleHandler _puzzleHandler;
 
     [SerializeField]
-    private float balloonsCount = 10;
+    private int balloonsCount = 20;
+    [SerializeField]
+    private int oneTimeSpawnCount = 5;
+    [SerializeField]
+    private float spawnDeltaTime = 0.1f;
     [SerializeField]
     private float minSpeed = 4;
     [SerializeField]
@@ -27,6 +32,16 @@ public class BalloonsHandler : MonoBehaviour
     public float MinSpeed { get => minSpeed; }
     public float MaxSpeed { get => maxSpeed; }
 
+    private void Awake()
+    {
+        _puzzleHandler = FindObjectOfType<PuzzleHandler>();   
+    }
+
+    private void OnEnable()
+    {
+        _puzzleHandler.onPlayerWin += StartSpawn;
+    }
+
     private void Start()
     {
         _soundHandler = FindObjectOfType<SoundHandler>();
@@ -35,9 +50,14 @@ public class BalloonsHandler : MonoBehaviour
         edgeY = Camera.main.orthographicSize;
     }
 
-    public void SpawnBalloons()
+    private void OnDisable()
     {
-        for (int i = 0; i < balloonsCount; i++)
+        _puzzleHandler.onPlayerWin -= StartSpawn;
+    }
+
+    public void SpawnBalloons(int count)
+    {
+        for (int i = 0; i < count; i++)
         {
             GameObject balloon = balloons[Random.Range(0, balloons.Count)];
             Vector2 spawnPosition = new Vector2(Random.Range(-edgeX, edgeX), -edgeY - 2);
@@ -60,5 +80,24 @@ public class BalloonsHandler : MonoBehaviour
                 _soundHandler.PlayBalloonClip();
             }   
         }
+    }
+
+    private IEnumerator SpawnObjects()
+    {
+        int count = 0;
+        while(count < balloonsCount)
+        {
+            SpawnBalloons(oneTimeSpawnCount);
+            count += oneTimeSpawnCount;
+            yield return new WaitForSeconds(spawnDeltaTime);
+        }
+
+        if (count - balloonsCount < 0)
+            SpawnBalloons(balloonsCount - count);
+    }
+
+    private void StartSpawn()
+    {
+        StartCoroutine(SpawnObjects());
     }
 }

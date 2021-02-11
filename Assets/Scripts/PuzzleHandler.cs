@@ -5,8 +5,6 @@ using UnityEngine;
 public class PuzzleHandler : MonoBehaviour
 {
     [SerializeField]
-    private BalloonsHandler _balloonsHandler;
-    [SerializeField]
     private ParticleHandler _particleHandler;
     [SerializeField]
     private GameObject completePuzzle;
@@ -61,7 +59,6 @@ public class PuzzleHandler : MonoBehaviour
             completePuzzle.SetActive(true);
             puzzleBackground.SetActive(false);
 
-            _balloonsHandler.SpawnBalloons();
             onPlayerWin();
         }
     }
