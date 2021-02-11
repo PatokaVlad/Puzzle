@@ -6,15 +6,17 @@ using UnityEngine.SceneManagement;
 public class UIHandler : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _previousButton;
+    private GameObject previousButton;
     [SerializeField]
-    private GameObject _nextButton;
+    private GameObject nextButton;
+    [SerializeField]
+    private GameObject puzzleName;
 
     private PuzzleHandler _puzzleHandler;
 
     private void OnEnable()
     {
-        _puzzleHandler.onPlayerWin += ActivateButtons;
+        _puzzleHandler.onPlayerWin += ActivateUI;
     }
 
     private void Awake()
@@ -22,14 +24,23 @@ public class UIHandler : MonoBehaviour
         _puzzleHandler = FindObjectOfType<PuzzleHandler>();
     }
 
-    private void OnDisable()
+    private void Start()
     {
-        _puzzleHandler.onPlayerWin -= ActivateButtons;
+        previousButton.SetActive(false);
+        nextButton.SetActive(false);
+        puzzleName.SetActive(false);
     }
 
-    private void ActivateButtons()
+    private void OnDisable()
     {
-        _previousButton.SetActive(SceneManager.GetActiveScene().buildIndex > 1);
-        _nextButton.SetActive(SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCountInBuildSettings - 1);
+        _puzzleHandler.onPlayerWin -= ActivateUI;
+    }
+
+    private void ActivateUI()
+    {
+        previousButton.SetActive(SceneManager.GetActiveScene().buildIndex > 1);
+        nextButton.SetActive(SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCountInBuildSettings - 1);
+
+        puzzleName.SetActive(true);
     }
 }
