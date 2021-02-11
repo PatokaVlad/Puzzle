@@ -7,11 +7,14 @@ public class PuzzlePiece : MonoBehaviour
     [SerializeField]
     private Transform _rightPlaceTransform;
     private Transform _transform;
+    private SpriteRenderer _spriteRenderer;
+    private SpriteRenderer _shadowSpriteRenderer;
 
     private Collider2D _collider2D;
 
     private PuzzleHandler _puzzleHandler;
     private SoundHandler _soundHandler;
+    private ShadowAnimationHandler _animationHandler;
 
     private Vector2 initialPosition = new Vector2();
 
@@ -20,6 +23,7 @@ public class PuzzlePiece : MonoBehaviour
     private float smoothDragMultiplier;
     private float minSmoothAnimationMultiplier;
     private float maxSmoothAnimationMultiplier;
+    private float shadowAnimationDuration;
 
     private bool inInitialPlace = false;
     private bool inRightPlace = false;
@@ -27,21 +31,33 @@ public class PuzzlePiece : MonoBehaviour
 
     private bool firstPress = false;
 
-    private void Start()
+    private void Awake()
     {
         _puzzleHandler = FindObjectOfType<PuzzleHandler>();
+    }
+
+    private void OnEnable()
+    {
+        _puzzleHandler.onPlayerWin += Disactivate;
+    }
+
+    private void Start()
+    {
         _soundHandler = FindObjectOfType<SoundHandler>();
 
+        _animationHandler = GetComponent<ShadowAnimationHandler>();
         _transform = GetComponent<Transform>();
         _collider2D = GetComponent<Collider2D>();
+
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _shadowSpriteRenderer = GetComponentsInChildren<SpriteRenderer>()[1];
 
         initialPosition = _transform.position;
 
         Initialize();
         _puzzleHandler.IncreasePiecesCount();
 
-        StartCoroutine(VisitStartPosition());
-
+        StartCoroutine(VisitStartPosition(_rightPlaceTransform.position));
     }
 
     private void Update()
@@ -63,6 +79,11 @@ public class PuzzlePiece : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        _puzzleHandler.onPlayerWin -= Disactivate;
+    }
+
     private void Initialize()
     {
         correctPositionAccuracy = _puzzleHandler.CorrectPositionAccuracy;
@@ -70,6 +91,7 @@ public class PuzzlePiece : MonoBehaviour
         smoothDragMultiplier = _puzzleHandler.SmoothDragMultiplier;
         minSmoothAnimationMultiplier = _puzzleHandler.MinSmoothAnimationMultiplier;
         maxSmoothAnimationMultiplier = _puzzleHandler.MaxSmoothAnimationMultiplier;
+        shadowAnimationDuration = _puzzleHandler.ShadowAnimationDuration;
     }
 
     private void HandlePressing()
@@ -83,6 +105,8 @@ public class PuzzlePiece : MonoBehaviour
                 if(_collider2D == Physics2D.OverlapPoint(touchPosition))
                 {
                     isTouched = true;
+                    ChangeSortingOrder(2);
+                    _animationHandler.StartAnimation(shadowAnimationDuration, 1, false, Vector2.zero);
                 }
                 break;
             case TouchPhase.Moved:
@@ -101,7 +125,8 @@ public class PuzzlePiece : MonoBehaviour
                 if (!inRightPlace && isTouched)
                 {
                     _soundHandler.PlayFailClip();
-                    _transform.position = initialPosition;
+                    ChangeSortingOrder(-2);
+                    DownPuzzlePiece();
                 }
                 isTouched = false;
                 break;
@@ -123,23 +148,26 @@ public class PuzzlePiece : MonoBehaviour
         if (Mathf.Abs(_transform.position.x - targetPlace.x) <= accuracy &&
             Mathf.Abs(_transform.position.y - targetPlace.y) <= accuracy)
         {
-            _transform.position = targetPlace;
-
             switch (type)
             {
                 case PositionsTypes.Start:
                     inInitialPlace = true;
                     break;
                 case PositionsTypes.Initial:
+                    ChangeSortingOrder(-2);
+
+                    _transform.position = targetPlace + new Vector2(-0.1f, 0.1f);
+                    _animationHandler.StartAnimation(shadowAnimationDuration, -1, true, new Vector2(0.1f, -0.1f));
+
                     _puzzleHandler.DecreasePiecesCount();
                     _puzzleHandler.PlayObjectParticle(_transform.position);
+
                     _soundHandler.PlayWinClip();
                     inRightPlace = true;
                     break;
                 default:
                     break;
-            }
-                
+            }  
         }
     }
 
@@ -170,7 +198,10 @@ public class PuzzlePiece : MonoBehaviour
             case TouchPhase.Began:
                 if (_collider2D == Physics2D.OverlapPoint(mousePosition))
                 {
-                    isTouched = true;
+                    ChangeSortingOrder(2);
+                    _animationHandler.StartAnimation(shadowAnimationDuration, 1, false, Vector2.zero);
+
+                    isTouched = true;                    
                     firstPress = false;
                 }
                 break;
@@ -183,8 +214,9 @@ public class PuzzlePiece : MonoBehaviour
             case TouchPhase.Ended:
                 if (!inRightPlace && isTouched)
                 {
+                    ChangeSortingOrder(-2);
+                    DownPuzzlePiece();
                     _soundHandler.PlayFailClip();
-                    _transform.position = initialPosition;
                 }
                 isTouched = false;
                 break;
@@ -195,10 +227,10 @@ public class PuzzlePiece : MonoBehaviour
         StickToRightPlace(_rightPlaceTransform.position, PositionsTypes.Initial, correctPositionAccuracy);
     }
 
-    private IEnumerator VisitStartPosition()
+    private IEnumerator VisitStartPosition(Vector2 targetPosition)
     {
         float smooth = Random.Range(minSmoothAnimationMultiplier, maxSmoothAnimationMultiplier);
-        _transform.position = _rightPlaceTransform.position;
+        _transform.position = targetPosition;
         yield return new WaitForSeconds(0.2f);
 
         while(!inInitialPlace)
@@ -209,6 +241,20 @@ public class PuzzlePiece : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    private void Disactivate() => gameObject.SetActive(false);
+
+    private void ChangeSortingOrder(int count)
+    {
+        _spriteRenderer.sortingOrder += count;
+        _shadowSpriteRenderer.sortingOrder += count;
+    }
+
+    private void DownPuzzlePiece()
+    {
+        _transform.position = initialPosition + new Vector2(-0.1f, 0.1f);
+        _animationHandler.StartAnimation(shadowAnimationDuration, -1, true, new Vector2(0.1f, -0.1f));
     }
 }
 

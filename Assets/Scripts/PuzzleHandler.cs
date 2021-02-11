@@ -8,6 +8,8 @@ public class PuzzleHandler : MonoBehaviour
     private BalloonsHandler _balloonsHandler;
     [SerializeField]
     private ParticleHandler _particleHandler;
+    [SerializeField]
+    private GameObject completePuzzle;
 
     private int piecesCount = 0;
 
@@ -21,6 +23,8 @@ public class PuzzleHandler : MonoBehaviour
     private float minSmoothAnimationMultiplier = 2.5f;
     [SerializeField]
     private float maxSmoothAnimationMultiplier = 4f;
+    [SerializeField]
+    private float shadowAnimationDuration = 0.5f;
 
     public delegate void OnPlayerWin();
     public event OnPlayerWin onPlayerWin;
@@ -34,6 +38,12 @@ public class PuzzleHandler : MonoBehaviour
     public float SmoothDragMultiplier { get => smoothDragMultiplier; }
     public float MinSmoothAnimationMultiplier { get => minSmoothAnimationMultiplier; }
     public float MaxSmoothAnimationMultiplier { get => maxSmoothAnimationMultiplier; }
+    public float ShadowAnimationDuration { get => shadowAnimationDuration; }
+
+    private void Start()
+    {
+        completePuzzle.SetActive(false);
+    }
 
     public void IncreasePiecesCount()
     {
@@ -46,6 +56,7 @@ public class PuzzleHandler : MonoBehaviour
 
         if(piecesCount == 0)
         {
+            completePuzzle.SetActive(true);
             _balloonsHandler.SpawnBalloons();
             onPlayerWin();
         }

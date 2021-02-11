@@ -44,3 +44,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _balloonsHandler: {fileID: 0}
+  _particleHandler: {fileID: 0}
+  completePuzzle: {fileID: 0}
+  correctPositionAccuracy: 0.2
+  animationAccuracy: 0.01
+  smoothDragMultiplier: 10
+  minSmoothAnimationMultiplier: 2.5
+  maxSmoothAnimationMultiplier: 4
+  shadowAnimationDuration: 0.5
+  useMouse: 0

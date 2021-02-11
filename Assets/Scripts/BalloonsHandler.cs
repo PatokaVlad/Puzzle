@@ -8,8 +8,6 @@ public class BalloonsHandler : MonoBehaviour
     private List<GameObject> balloons = new List<GameObject>();
 
     [SerializeField]
-    private Camera _camera;
-    [SerializeField]
     private ParticleHandler _particleHandler;
     private SoundHandler _soundHandler;
 
@@ -33,8 +31,8 @@ public class BalloonsHandler : MonoBehaviour
     {
         _soundHandler = FindObjectOfType<SoundHandler>();
 
-        edgeX = _camera.orthographicSize * _camera.aspect;
-        edgeY = _camera.orthographicSize;
+        edgeX = Camera.main.orthographicSize * Camera.main.aspect;
+        edgeY = Camera.main.orthographicSize;
     }
 
     public void SpawnBalloons()
@@ -58,8 +56,9 @@ public class BalloonsHandler : MonoBehaviour
         {
             balloonsCount--;
             if(_soundHandler != null)
+            {
                 _soundHandler.PlayBalloonClip();
+            }   
         }
-
     }
 }
