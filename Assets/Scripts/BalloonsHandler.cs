@@ -15,6 +15,10 @@ public class BalloonsHandler : MonoBehaviour
 
     [SerializeField]
     private float balloonsCount = 10;
+    [SerializeField]
+    private float minSpeed = 4;
+    [SerializeField]
+    private float maxSpeed = 7;
     private float edgeX,
         edgeY;
 
@@ -22,6 +26,8 @@ public class BalloonsHandler : MonoBehaviour
     private bool useMouse;
 
     public bool UseMouse { get => useMouse; }
+    public float MinSpeed { get => minSpeed; }
+    public float MaxSpeed { get => maxSpeed; }
 
     private void Start()
     {

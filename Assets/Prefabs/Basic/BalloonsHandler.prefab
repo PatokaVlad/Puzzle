@@ -44,6 +44,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   balloons:
-  - {fileID: 1219425848787697855, guid: 5136b9237da447a4db9e0ca18d3cfcce, type: 3}
+  - {fileID: 5319448145205198664, guid: 9e86583712bfd7d4f88ab8c0814b8f43, type: 3}
+  - {fileID: 2081512904175498406, guid: 9677ce1a0ecfb7d428ac1a81f9aedfa6, type: 3}
+  - {fileID: 3309723513616456403, guid: d66065a0f90e5e64bb2ad23ffa30cb62, type: 3}
   _camera: {fileID: 0}
+  _particleHandler: {fileID: 0}
   balloonsCount: 10
+  useMouse: 0

@@ -8,10 +8,8 @@ public class Balloon : MonoBehaviour
     private Transform _transform;
     private BalloonsHandler _balloonsHandler;
 
-    [SerializeField]
-    private float minSpeed = 4;
-    [SerializeField]
-    private float maxSpeed = 7;
+    private float minSpeed;
+    private float maxSpeed;
 
     private float speed;
 
@@ -24,6 +22,7 @@ public class Balloon : MonoBehaviour
         _transform = GetComponent<Transform>();
         _collider2D = GetComponent<Collider2D>();
 
+        Initialize();
         speed = Random.Range(minSpeed, maxSpeed);
     }
 
@@ -35,6 +34,12 @@ public class Balloon : MonoBehaviour
             CheckPressing();
         else
             CheckMousePressing();
+    }
+
+    private void Initialize()
+    {
+        minSpeed = _balloonsHandler.MinSpeed;
+        maxSpeed = _balloonsHandler.MaxSpeed;
     }
 
     private void MoveUp()
