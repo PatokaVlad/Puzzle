@@ -31,9 +31,9 @@ public class Balloon : MonoBehaviour
         MoveUp();
 
         if(!_balloonsHandler.UseMouse)
-            CheckPressing();
+            TouchHandle();
         else
-            CheckMousePressing();
+            MouseHandle();
     }
 
     private void Initialize()
@@ -48,7 +48,7 @@ public class Balloon : MonoBehaviour
         _transform.position += delta;
     }
 
-    private void CheckPressing()
+    private void TouchHandle()
     {
         if (Input.touchCount > 0)
         {
@@ -59,7 +59,7 @@ public class Balloon : MonoBehaviour
         }
     }
 
-    private void CheckMousePressing()
+    private void MouseHandle()
     {
         if (Input.GetMouseButtonDown(0))
         {

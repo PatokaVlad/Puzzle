@@ -10,6 +10,8 @@ public class PuzzleHandler : MonoBehaviour
     private ParticleHandler _particleHandler;
     [SerializeField]
     private GameObject completePuzzle;
+    [SerializeField]
+    private GameObject puzzleBackground;
 
     private int piecesCount = 0;
 
@@ -57,6 +59,8 @@ public class PuzzleHandler : MonoBehaviour
         if(piecesCount == 0)
         {
             completePuzzle.SetActive(true);
+            puzzleBackground.SetActive(false);
+
             _balloonsHandler.SpawnBalloons();
             onPlayerWin();
         }

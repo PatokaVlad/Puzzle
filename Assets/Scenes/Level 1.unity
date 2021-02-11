@@ -514,7 +514,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 96b2d3ceb0b75a94e8f1f41c605e046b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.6117647}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.49019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1094,7 +1094,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 06df011a2a67df447a9bc540fa82ed2e, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.6117647}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.49019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1911,7 +1911,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 9a244397a29b2aa488438d8632bd2ae3, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.6117647}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.49019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2023,7 +2023,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 5a87a8eff5cb745489b11282567da6ce, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.6117647}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.49019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2703,7 +2703,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 8ca2b537cad1f3647b84ad6180540f2a, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.6117647}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.49019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3038,7 +3038,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 69ab975061ec58243af838c7d49d171c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.6117647}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.49019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3120,7 +3120,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: aba505f1e4917d14385449254f1cd556, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.6117647}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.49019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3279,6 +3279,7 @@ GameObject:
   - component: {fileID: 1836014140}
   - component: {fileID: 1836014141}
   - component: {fileID: 1836014142}
+  - component: {fileID: 1836014143}
   m_Layer: 0
   m_Name: Dino
   m_TagString: Untagged
@@ -3364,6 +3365,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdf35b242e023d4459be7c4cf16a962b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1836014143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836014139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3d167de428a74e41b3a97dfc726e2c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowAnimationDuration: 0.5
+  animationDuration: 1
+  useMouse: 1
 --- !u!1 &1886874361
 GameObject:
   m_ObjectHideFlags: 0
@@ -3506,7 +3522,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: ad2797e236374674fb938269e6c08f46, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.6117647}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.49019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3577,6 +3593,10 @@ PrefabInstance:
       propertyPath: _particleHandler
       value: 
       objectReference: {fileID: 1190174793}
+    - target: {fileID: 425817425713849866, guid: 855d15b92d5783148995557df5b7622e, type: 3}
+      propertyPath: puzzleBackground
+      value: 
+      objectReference: {fileID: 1329610983}
     - target: {fileID: 425817425713849866, guid: 855d15b92d5783148995557df5b7622e, type: 3}
       propertyPath: smoothDragMultiplier
       value: 10
