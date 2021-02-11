@@ -15,16 +15,11 @@ public class PuzzlePiece : MonoBehaviour
 
     private Vector2 initialPosition = new Vector2();
 
-    [SerializeField]
-    private float correctPositionAccuracy = 0.5f;
-    [SerializeField]
-    private float animationAccuracy = 0.01f;
-    [SerializeField]
-    private float smoothDragMultiplier = 4f;
-    [SerializeField]
-    private float minSmoothAnimationMultiplier = 1.5f;
-    [SerializeField]
-    private float maxSmoothAnimationMultiplier = 3f;
+    private float correctPositionAccuracy;
+    private float animationAccuracy;
+    private float smoothDragMultiplier;
+    private float minSmoothAnimationMultiplier;
+    private float maxSmoothAnimationMultiplier;
 
     private bool inInitialPlace = false;
     private bool inRightPlace = false;
@@ -41,9 +36,12 @@ public class PuzzlePiece : MonoBehaviour
         _collider2D = GetComponent<Collider2D>();
 
         initialPosition = _transform.position;
+
+        Initialize();
         _puzzleHandler.IncreasePiecesCount();
 
         StartCoroutine(VisitStartPosition());
+
     }
 
     private void Update()
@@ -63,6 +61,15 @@ public class PuzzlePiece : MonoBehaviour
                     MouseMove();
             }
         }
+    }
+
+    private void Initialize()
+    {
+        correctPositionAccuracy = _puzzleHandler.CorrectPositionAccuracy;
+        animationAccuracy = _puzzleHandler.AnimationAccuracy;
+        smoothDragMultiplier = _puzzleHandler.SmoothDragMultiplier;
+        minSmoothAnimationMultiplier = _puzzleHandler.MinSmoothAnimationMultiplier;
+        maxSmoothAnimationMultiplier = _puzzleHandler.MaxSmoothAnimationMultiplier;
     }
 
     private void HandlePressing()
@@ -192,6 +199,8 @@ public class PuzzlePiece : MonoBehaviour
     {
         float smooth = Random.Range(minSmoothAnimationMultiplier, maxSmoothAnimationMultiplier);
         _transform.position = _rightPlaceTransform.position;
+        yield return new WaitForSeconds(0.2f);
+
         while(!inInitialPlace)
         {
             smooth += Time.deltaTime;

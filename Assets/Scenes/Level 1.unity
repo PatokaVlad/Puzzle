@@ -269,11 +269,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rightPlaceTransform: {fileID: 2126572763}
-  correctPositionAccuracy: 0.5
-  animationAccuracy: 0.01
-  smoothDragMultiplier: 4
-  minSmoothAnimationMultiplier: 1.5
-  maxSmoothAnimationMultiplier: 3
 --- !u!60 &55373163
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -867,11 +862,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rightPlaceTransform: {fileID: 1030806135}
-  correctPositionAccuracy: 0.5
-  animationAccuracy: 0.01
-  smoothDragMultiplier: 4
-  minSmoothAnimationMultiplier: 1.5
-  maxSmoothAnimationMultiplier: 3
 --- !u!60 &532979402
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1164,11 +1154,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rightPlaceTransform: {fileID: 502617637}
-  correctPositionAccuracy: 0.5
-  animationAccuracy: 0.01
-  smoothDragMultiplier: 4
-  minSmoothAnimationMultiplier: 1.5
-  maxSmoothAnimationMultiplier: 3
 --- !u!60 &621864242
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1374,11 +1359,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rightPlaceTransform: {fileID: 1969032259}
-  correctPositionAccuracy: 0.5
-  animationAccuracy: 0.01
-  smoothDragMultiplier: 4
-  minSmoothAnimationMultiplier: 1.5
-  maxSmoothAnimationMultiplier: 3
 --- !u!60 &850207483
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1616,11 +1596,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rightPlaceTransform: {fileID: 1588370153}
-  correctPositionAccuracy: 0.5
-  animationAccuracy: 0.01
-  smoothDragMultiplier: 4
-  minSmoothAnimationMultiplier: 1.5
-  maxSmoothAnimationMultiplier: 3
 --- !u!60 &917538898
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1829,11 +1804,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rightPlaceTransform: {fileID: 591718049}
-  correctPositionAccuracy: 0.5
-  animationAccuracy: 0.01
-  smoothDragMultiplier: 4
-  minSmoothAnimationMultiplier: 1.5
-  maxSmoothAnimationMultiplier: 3
 --- !u!60 &1096106910
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -2247,11 +2217,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rightPlaceTransform: {fileID: 1886874362}
-  correctPositionAccuracy: 0.5
-  animationAccuracy: 0.01
-  smoothDragMultiplier: 4
-  minSmoothAnimationMultiplier: 1.5
-  maxSmoothAnimationMultiplier: 3
 --- !u!60 &1234348009
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -2837,6 +2802,18 @@ PrefabInstance:
       propertyPath: _particleHandler
       value: 
       objectReference: {fileID: 1190174793}
+    - target: {fileID: 425817425713849866, guid: 855d15b92d5783148995557df5b7622e, type: 3}
+      propertyPath: smoothDragMultiplier
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 425817425713849866, guid: 855d15b92d5783148995557df5b7622e, type: 3}
+      propertyPath: maxSmoothAnimationMultiplier
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 425817425713849866, guid: 855d15b92d5783148995557df5b7622e, type: 3}
+      propertyPath: minSmoothAnimationMultiplier
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 425817425713849867, guid: 855d15b92d5783148995557df5b7622e, type: 3}
       propertyPath: m_RootOrder
       value: 2
