@@ -14,6 +14,9 @@ public class PuzzleHandler : MonoBehaviour
     private int piecesCount = 0;
 
     [SerializeField]
+    private List<Vector2> positions = new List<Vector2>();
+
+    [SerializeField]
     private float correctPositionAccuracy = 0.5f;
     [SerializeField]
     private float animationAccuracy = 0.01f;
@@ -45,9 +48,10 @@ public class PuzzleHandler : MonoBehaviour
         completePuzzle.SetActive(false);
     }
 
-    public void IncreasePiecesCount()
+    public void IncreasePiecesCount(Vector2 position)
     {
         piecesCount++;
+        positions.Add(position);
     }
 
     public void DecreasePiecesCount()
@@ -66,5 +70,14 @@ public class PuzzleHandler : MonoBehaviour
     public void PlayObjectParticle(Vector2 position)
     {
         _particleHandler.PlayParticle(position);
+    }
+
+    public Vector2 GenerateInitialPosition()
+    {
+        int index = Random.Range(0, positions.Count - 1);
+        Vector2 newPosition = positions[index];
+        positions.Remove(newPosition);
+
+        return newPosition;
     }
 }

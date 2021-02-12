@@ -34,6 +34,10 @@ public class PuzzlePiece : MonoBehaviour
     private void Awake()
     {
         _puzzleHandler = FindObjectOfType<PuzzleHandler>();
+        _transform = GetComponent<Transform>();
+
+        initialPosition = _transform.position;
+        _puzzleHandler.IncreasePiecesCount(initialPosition);
     }
 
     private void OnEnable()
@@ -46,17 +50,15 @@ public class PuzzlePiece : MonoBehaviour
         _soundHandler = FindObjectOfType<SoundHandler>();
 
         _animationHandler = GetComponent<ShadowAnimationHandler>();
-        _transform = GetComponent<Transform>();
+        
         _collider2D = GetComponent<Collider2D>();
 
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _shadowSpriteRenderer = GetComponentsInChildren<SpriteRenderer>()[1];
 
-        initialPosition = _transform.position;
-
         Initialize();
-        _puzzleHandler.IncreasePiecesCount();
-
+        
+        initialPosition = _puzzleHandler.GenerateInitialPosition();
         StartCoroutine(VisitStartPosition(_rightPlaceTransform.position));
     }
 
