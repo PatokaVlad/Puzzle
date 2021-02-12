@@ -29,9 +29,6 @@ public class BalloonsHandler : MonoBehaviour
     [SerializeField]
     private bool useMouse;
 
-    public delegate void OnBalloonsDestroyed();
-    public event OnBalloonsDestroyed onBalloonsDestroyed;
-
     public bool UseMouse { get => useMouse; }
     public float MinSpeed { get => minSpeed; }
     public float MaxSpeed { get => maxSpeed; }
@@ -50,6 +47,7 @@ public class BalloonsHandler : MonoBehaviour
     {
         _soundHandler = FindObjectOfType<SoundHandler>();
 
+        countOnScene = balloonsCount;
         edgeX = Camera.main.orthographicSize * Camera.main.aspect;
         edgeY = Camera.main.orthographicSize;
     }
@@ -76,16 +74,12 @@ public class BalloonsHandler : MonoBehaviour
 
     public void DecreaseBalloonsCount()
     {
-        if (balloonsCount != 0)
+        if (countOnScene != 0)
         {
-            balloonsCount--;
+            countOnScene--;
             if(_soundHandler != null)
             {
                 _soundHandler.PlayBalloonClip();
-            }
-            if (balloonsCount == 0) 
-            {
-                onBalloonsDestroyed();
             }
         }
     }

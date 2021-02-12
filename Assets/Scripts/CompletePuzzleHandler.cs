@@ -8,7 +8,6 @@ public class CompletePuzzleHandler : MonoBehaviour
     private ShadowAnimationHandler _animationHandler;
     private Transform _transform;
     private SoundHandler _soundHandler;
-    private BalloonsHandler _balloonsHandler;
 
     private Vector2 startPosition = new Vector2();
 
@@ -16,20 +15,17 @@ public class CompletePuzzleHandler : MonoBehaviour
     private float shadowAnimationDuration = 0.5f;
     [SerializeField]
     private float animationDuration = 1f;
+    [SerializeField]
+    private float beforeStartTime = 8;
 
     private bool isPlaying = false;
+    private bool firstPlay = true;
 
     [SerializeField]
     private bool useMouse = false;
 
-    private void OnEnable()
-    {
-        _balloonsHandler.onBalloonsDestroyed += PlayAnimation;
-    }
-
     private void Awake()
     {
-        _balloonsHandler = FindObjectOfType<BalloonsHandler>();
         _soundHandler = FindObjectOfType<SoundHandler>();
     }
 
@@ -40,6 +36,8 @@ public class CompletePuzzleHandler : MonoBehaviour
         _transform = GetComponent<Transform>();
 
         startPosition = _transform.position;
+        firstPlay = true;
+        StartCoroutine(PlayAnimation());
     }
 
     private void Update()
@@ -53,16 +51,14 @@ public class CompletePuzzleHandler : MonoBehaviour
         }
     }
 
-    private void OnDisable()
-    {
-        _balloonsHandler.onBalloonsDestroyed -= PlayAnimation;
-    }
-
     private void CheckInput(Vector2 position)
     {
         if (_collider2D == Physics2D.OverlapPoint(position))
         {
-            StartCoroutine(StartAnimation());
+            if (!firstPlay)
+            {
+                StartCoroutine(StartAnimation());
+            }
         }
     }
 
@@ -102,8 +98,10 @@ public class CompletePuzzleHandler : MonoBehaviour
         isPlaying = false;
     }
 
-    private void PlayAnimation()
+    private IEnumerator PlayAnimation()
     {
+        yield return new WaitForSeconds(beforeStartTime);
+        firstPlay = false; ;
         StartCoroutine(StartAnimation());
     }
 }

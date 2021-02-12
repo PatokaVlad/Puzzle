@@ -2582,7 +2582,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shadowAnimationDuration: 0.5
   animationDuration: 1
-  useMouse: 1
+  useMouse: 0
 --- !u!60 &1836014144
 PolygonCollider2D:
   m_ObjectHideFlags: 0
