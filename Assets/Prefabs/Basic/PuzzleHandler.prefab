@@ -46,7 +46,7 @@ MonoBehaviour:
   _particleHandler: {fileID: 8373693278543706391, guid: 99b6cc9f4c15c1e44b32ba09f542296e, type: 3}
   completePuzzle: {fileID: 0}
   puzzleBackground: {fileID: 0}
-  correctPositionAccuracy: 0.2
+  correctPositionAccuracy: 0.5
   animationAccuracy: 0.01
   smoothDragMultiplier: 10
   minSmoothAnimationMultiplier: 2.5

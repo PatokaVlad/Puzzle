@@ -22,11 +22,15 @@ public class BalloonsHandler : MonoBehaviour
     private float minSpeed = 4;
     [SerializeField]
     private float maxSpeed = 7;
+    private int countOnScene;
     private float edgeX,
         edgeY;
 
     [SerializeField]
     private bool useMouse;
+
+    public delegate void OnBalloonsDestroyed();
+    public event OnBalloonsDestroyed onBalloonsDestroyed;
 
     public bool UseMouse { get => useMouse; }
     public float MinSpeed { get => minSpeed; }
@@ -78,7 +82,11 @@ public class BalloonsHandler : MonoBehaviour
             if(_soundHandler != null)
             {
                 _soundHandler.PlayBalloonClip();
-            }   
+            }
+            if (balloonsCount == 0) 
+            {
+                onBalloonsDestroyed();
+            }
         }
     }
 

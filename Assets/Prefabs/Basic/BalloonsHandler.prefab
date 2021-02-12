@@ -50,7 +50,7 @@ MonoBehaviour:
   _particleHandler: {fileID: 0}
   balloonsCount: 20
   oneTimeSpawnCount: 5
-  spawnDeltaTime: 0.1
+  spawnDeltaTime: 1
   minSpeed: 2
-  maxSpeed: 4
+  maxSpeed: 3.5
   useMouse: 0

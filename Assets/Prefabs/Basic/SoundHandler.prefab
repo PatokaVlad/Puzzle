@@ -48,6 +48,7 @@ MonoBehaviour:
   winClip: {fileID: 8300000, guid: 437ba3dd0f609d546b08e72788ab70c9, type: 3}
   balloonClip: {fileID: 8300000, guid: f81001dc9674bf24ba264736b46714b1, type: 3}
   completePuzzleClip: {fileID: 8300000, guid: f4fe9e10ec249e0488246c1b32c4c611, type: 3}
+  startClip: {fileID: 8300000, guid: 7a3c3db631e872444abbc055de6cde2e, type: 3}
 --- !u!82 &419363592156475117
 AudioSource:
   m_ObjectHideFlags: 0

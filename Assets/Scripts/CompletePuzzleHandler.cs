@@ -8,7 +8,7 @@ public class CompletePuzzleHandler : MonoBehaviour
     private ShadowAnimationHandler _animationHandler;
     private Transform _transform;
     private SoundHandler _soundHandler;
-    private PuzzleHandler _puzzleHandler;
+    private BalloonsHandler _balloonsHandler;
 
     private Vector2 startPosition = new Vector2();
 
@@ -24,12 +24,12 @@ public class CompletePuzzleHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        _puzzleHandler.onPlayerWin += PlayAnimation;
+        _balloonsHandler.onBalloonsDestroyed += PlayAnimation;
     }
 
     private void Awake()
     {
-        _puzzleHandler = FindObjectOfType<PuzzleHandler>();
+        _balloonsHandler = FindObjectOfType<BalloonsHandler>();
         _soundHandler = FindObjectOfType<SoundHandler>();
     }
 
@@ -55,7 +55,7 @@ public class CompletePuzzleHandler : MonoBehaviour
 
     private void OnDisable()
     {
-        _puzzleHandler.onPlayerWin -= PlayAnimation;
+        _balloonsHandler.onBalloonsDestroyed -= PlayAnimation;
     }
 
     private void CheckInput(Vector2 position)
